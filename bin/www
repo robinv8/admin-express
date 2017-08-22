@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+var app=require('../app');
+
+var debug=require('debug')('blog:server');
+
+var http=require('http');
+
+var port=process.env.PORT||'3000';
+
+app.set('port',port);
+
+// 启动工程
+var server = http.createServer(app);
+
+// 监听端口号
+server.listen(port);
+
