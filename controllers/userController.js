@@ -7,5 +7,8 @@ module.exports = (app) => {
   });
   app.post('/updateUser', (req, res, next) => {
     userDao.update(req, res, next)
+  });
+  app.post('/findAll', (req, res, next) => {
+    userDao.findAll(req, res, next);
   })
 }

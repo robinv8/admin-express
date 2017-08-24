@@ -4,7 +4,23 @@ var express = require('express')
   , index = require('./routes/index')
   , users = require('./routes/users')
   , fs = require('fs')
+  , morgan = require('morgan')
+  , FileStreamRotator = require('file-stream-rotator')
   , app = express();
+
+/**
+ * logger configuration
+ */
+var logDirectory = path.join(__dirname, 'log')
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+var accessLogStream = FileStreamRotator.getStream({
+  date_format: 'YYYYMMDD',
+  filename: path.join(logDirectory, 'access-%DATE%.log'),
+  frequency: 'daily',
+  verbose: false
+})
+//{stream: accessLogStream}
+app.use(morgan('combined'));
 
 
 app.set('port', process.env.PORT || 3000)
@@ -29,14 +45,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(function (req, res) {
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
-});
-
-var urlencodedParser = bodyParser.urlencoded({extended: false})
-app.post('/json', bodyParser.json(), function (req, res) {
+app.post('/json', function (req, res) {
   console.log(req.body);
   res.send(req.body);
 
@@ -63,6 +72,7 @@ files.forEach((filename) => {
   if (filePrefix.length < 1 || filePostfile.length < 1 || filePostfile !== 'js') {
     return
   }
+
   require(controllerPath + '/' + filePrefix)(app);
 })
 

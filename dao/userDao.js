@@ -1,7 +1,7 @@
 var app = require('../config/applicationMysql');
-var userModel = require('../models/j_user');
+var userModel = require('../models/j_base');
 var createdResponse = require('../responses/created')
-var User = userModel(app, app.Sequelize);
+var User = userModel('j_user');
 
 module.exports = {
   create: function (req, res, next) {
@@ -25,6 +25,25 @@ module.exports = {
         }
       }).then(function (result) {
         res.send(JSON.stringify(result))
+      }).catch(function (err) {
+        console.log('failed: ' + err);
+      });
+    })
+  },
+  findAll: function (req, res, next) {
+    const pageIndex = req.body.pageIndex;
+    const pageSize = req.body.pageSize;
+    app.sync().then(function () {
+      User.findAll({offset: (pageIndex - 1) * pageSize, limit: pageSize}).then(function (result) {
+        User.count().then(function (total) {
+          res.send({
+            code: 1,
+            data: {
+              content: result,
+              total: total
+            }
+          })
+        })
       }).catch(function (err) {
         console.log('failed: ' + err);
       });
