@@ -7,11 +7,11 @@ module.exports = (function () {
         type: DataTypes.STRING(64),
         allowNull: false,
         primaryKey: true,
-
+        defaultValue:DataTypes.UUIDV1
       },
       username: {
         type: DataTypes.STRING(16),
-        allowNull: false
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING(32),

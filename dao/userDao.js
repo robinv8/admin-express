@@ -1,17 +1,18 @@
 var app = require('../config/applicationMysql');
 var userModel = require('../models/j_base');
-var createdResponse = require('../responses/created')
+var Response = require('../responses/responsejson')
 var User = userModel('j_user');
 
 module.exports = {
   create: function (req, res, next) {
     app.sync().then(function () {
       User.create({
-        username: 'sasasa'
+        username: req.body.username,
+        password: req.body.password
       }).then(function (result) {
-        res.send(JSON.stringify(result))
+        res.send(Response.success(result))
       }).catch(function (err) {
-        console.log('failed: ' + err);
+        res.send(Response.error(err))
       });
     })
   },
