@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bufferhelper": "^0.2.1",
     "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
@@ -19,8 +20,8 @@
     "express-session": "^1.15.5",
     "file-stream-rotator": "^0.2.0",
     "morgan": "^1.8.2",
-    "mysql": "^2.14.1",
+    "mysql2": "^1.4.2",
     "sequelize": "^4.6.0",
-    "uuid": "^3.1.0"
+    "superagent": "^3.6.0"
   }
 }

@@ -22,13 +22,13 @@ var accessLogStream = FileStreamRotator.getStream({
 })
 //{stream: accessLogStream}
 app.use(morgan('combined'));
-app.all('*', function(req, res, next) {
+app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-  res.header("X-Powered-By",' 3.2.1')
-  if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
-  else  next();
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By", ' 3.2.1')
+  if (req.method == "OPTIONS") res.send(200);/*让options请求快速返回*/
+  else next();
 });
 
 app.set('port', process.env.PORT || 3000)
@@ -52,12 +52,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // parse application/json
 app.use(bodyParser.json())
-
-app.post('/json', function (req, res) {
-  console.log(req.body);
-  res.send(req.body);
-
-});
 
 /**
  * scanning controller
@@ -88,7 +82,9 @@ files.forEach((filename) => {
 /**
  * load the routing
  */
-app.use('/', index);
+app.get('/', function(req, res){
+  res.render('index', { title: 'Express' });
+});
 app.use('/users', users);
 
 module.exports = app;
