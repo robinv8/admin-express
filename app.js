@@ -5,10 +5,10 @@ var express = require('express')
   , users = require('./routes/users')
   , fs = require('fs')
   , morgan = require('morgan')
-  , spider = require('./spider/spider')
+  //, spider = require('./spider/spider')
   , FileStreamRotator = require('file-stream-rotator')
+  ,speech=require('./util/aipspeechclient')
   , app = express();
-
 /**
  * logger configuration
  */
@@ -82,8 +82,8 @@ files.forEach((filename) => {
 /**
  * load the routing
  */
-app.get('/', function(req, res){
-  res.render('index', { title: 'Express' });
+app.get('/', function (req, res) {
+  res.render('index', {title: 'Express'});
 });
 app.use('/users', users);
 

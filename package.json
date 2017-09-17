@@ -21,6 +21,7 @@
     "file-stream-rotator": "^0.2.0",
     "morgan": "^1.8.2",
     "mysql2": "^1.4.2",
+    "recordrtc-nodejs": "^1.0.6",
     "sequelize": "^4.6.0",
     "superagent": "^3.6.0"
   }

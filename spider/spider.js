@@ -1,14 +1,18 @@
 var cheerio = require('cheerio');
-var httpHelper=require('../util/httpHelper')
+var httpHelper = require('../util/httpHelper')
 var SpiderDao = require('../dao/SpiderDao');
+var superagent = require('superagent');
 
 function download(url, callback) {
-  httpHelper.get(url, 1000, function (err, data) {
-    if (err) {
-      return err;
-    }
-    callback(data);
-  }, 'gbk', {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'});
+  var options = require('url').parse(url);
+  superagent.get(options)
+    .end(function (err, res) {
+      if(res&&res.text){
+        callback(res.text);
+      }else{
+        console.log(err.message||'请求异常！');
+      }
+    });
 
 }
 
@@ -54,7 +58,7 @@ function CheckUrl(str) {
   return true;
 }
 
-spider('https://cnodejs.org/')
+spider('https://www.cnblogs.com/')
 
 
 function traverse(_self, $) {
@@ -64,7 +68,7 @@ function traverse(_self, $) {
     }
     if ($(this).children().length > 0) {
       /*var _$ = cheerio.load($(this).html(), {decodeEntities: false});*/
-      traverse($(this), $);
+      //traverse($(this), $);
     } else {
       return
     }

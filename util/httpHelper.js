@@ -9,7 +9,7 @@ var https = require('https');
 var qs = require('querystring');
 var iconv = require('iconv-lite');
 var BufferHelper = require('bufferhelper');
-
+var superagent = require('superagent');
 /**
  * @exports tool/httpHelper
  */
@@ -47,9 +47,14 @@ var httpHelper = {
     }
     /** 为true时直接返回数据流 */
     options.buffer = options.buffer || false;
-
-    var req = httpLib.request(options, function (res) {
+    superagent.get(options)
+      .end(function (err, res) {
+        callback(null, _data, res, req);
+      });
+/*    var req = httpLib.request(options, function (res) {
+      var contentType = res.headers["content-type"].split(';')[1].split('=')[1];
       var bufferHelper = new BufferHelper();
+
       res.on('data', function (chunk) {
         bufferHelper.concat(chunk);
       });
@@ -59,11 +64,13 @@ var httpHelper = {
           _data = bufferHelper.toBuffer();
         }
         else {
-          if (typeof encoding != 'undefined' && encoding !== null) {
-            _data = iconv.decode(bufferHelper.toBuffer(), encoding);
+          _data = iconv.decode(bufferHelper.toBuffer(), contentType);
+
+          /!*if (typeof contentType != 'undefined' && contentType === 'text/html; charset=utf-8') {
+            _data = iconv.decode(bufferHelper.toBuffer(), 'utf-8');
           } else {
             _data = iconv.decode(bufferHelper.toBuffer(), 'utf-8');
-          }
+          }*!/
         }
         callback(null, _data, res, req);
       });
@@ -81,7 +88,7 @@ var httpHelper = {
       });
     }
 
-    req.end();
+    req.end();*/
   },
 
   /**

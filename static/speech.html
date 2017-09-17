@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="result"></div>
+<script>
+  var newRecognition = new webkitSpeechRecognition();
+  newRecognition.continuous = true;
+  newRecognition.interimResults = true;
+  newRecognition.onresult = function (evt) {
+    for (var i = 0; i < evt.results.length; ++i) {
+      document.getElementById('result').innerHTML=evt.results[i][0].transcript;
+    }
+  }
+  newRecognition.start()
+</script>
+</body>
+</html>
