@@ -1,8 +1,7 @@
-var app = require('../config/applicationMysql');
-var userModel = require('../models/j_base');
-var Response = require('../responses/responsejson')
-var User = userModel('j_user');
-
+var BaseDao = require('./baseDao');
+var userDao = Object.create(BaseDao('j_users'));
+module.exports = userDao;
+/*
 module.exports = {
   create: function (req, res, next) {
     app.sync().then(function () {
@@ -16,10 +15,12 @@ module.exports = {
       });
     })
   },
+
   update: function (req, res, next) {
     app.sync().then(function () {
       User.update({
-        username: 'admin'
+        username: req.body.username,
+        password: req.body.password
       }, {
         where: {
           id: 'ae283c70-8752-11e7-a143-8fd8b4caf80a'
@@ -31,7 +32,18 @@ module.exports = {
       });
     })
   },
-  findAll: function (req, res, next) {
+  remove: function (req, res, next) {
+    app.sync().then(function () {
+      const id = req.params.id;
+      User.destroy({'where': {'id': id}})
+        .then((result) => {
+          res.send(Response.success(result))
+        }).catch((err) => {
+        res.send(Response.error(err))
+      })
+    })
+  },
+  find: function (req, res, next) {
     const pageIndex = req.body.pageIndex;
     const pageSize = req.body.pageSize;
     app.sync().then(function () {
@@ -50,4 +62,4 @@ module.exports = {
       });
     })
   }
-};
+};*/
