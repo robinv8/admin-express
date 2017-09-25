@@ -7,7 +7,7 @@ var express = require('express')
   , morgan = require('morgan')
   //, spider = require('./spider/spider')
   , FileStreamRotator = require('file-stream-rotator')
-  ,speech=require('./util/aipspeechclient')
+  //,speech=require('./util/aipspeechclient')
   , app = express();
 /**
  * logger configuration
@@ -56,6 +56,7 @@ app.use(bodyParser.json())
 /**
  * scanning controller
  */
+app.version = 'v1'
 var controllerPath = __dirname + '/controllers';
 var self = __filename.substring(__dirname.length + 1);
 var files = fs.readdirSync(controllerPath);
@@ -74,7 +75,6 @@ files.forEach((filename) => {
   if (filePrefix.length < 1 || filePostfile.length < 1 || filePostfile !== 'js') {
     return
   }
-
   require(controllerPath + '/' + filePrefix)(app);
 })
 

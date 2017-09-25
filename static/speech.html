@@ -1,21 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
 </head>
 <body>
-<div id="result"></div>
+<div>
+    <audio controls autoplay></audio>
+    <input onclick="startRecording()" type="button" value="录音" />
+    <input onclick="stopRecording()" type="button" value="停止" />
+    <input onclick="playRecording()" type="button" value="播放" />
+    <input onclick="uploadAudio()" type="button" value="提交" />
+</div>
+
+<script type="text/javascript" src="HZRecorder.js"></script>
+
+
 <script>
-  var newRecognition = new webkitSpeechRecognition();
-  newRecognition.continuous = true;
-  newRecognition.interimResults = true;
-  newRecognition.onresult = function (evt) {
-    for (var i = 0; i < evt.results.length; ++i) {
-      document.getElementById('result').innerHTML=evt.results[i][0].transcript;
-    }
+
+  var recorder;
+
+  var audio = document.querySelector('audio');
+
+  function startRecording() {
+    HZRecorder.get(function (rec) {
+      recorder = rec;
+      recorder.start();
+    });
   }
-  newRecognition.start()
+
+  function stopRecording() {
+    recorder.stop();
+  }
+
+  function playRecording() {
+    recorder.play(audio);
+  }
+
+  function uploadAudio() {
+    recorder.upload("upload", function (state, e) {
+      switch (state) {
+        case 'uploading':
+          //var percentComplete = Math.round(e.loaded * 100 / e.total) + '%';
+          break;
+        case 'ok':
+          //alert(e.target.responseText);
+          alert("上传成功");
+          break;
+        case 'error':
+          alert("上传失败");
+          break;
+        case 'cancel':
+          alert("上传被取消");
+          break;
+      }
+    });
+  }
+
 </script>
+
 </body>
 </html>

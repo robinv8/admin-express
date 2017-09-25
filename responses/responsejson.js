@@ -2,7 +2,7 @@ module.exports = {
   success: function (data) {
     return {
       code: 1,
-      data: JSON.stringify(data),
+      data: data,
       msg: '操作成功！'
     }
   },

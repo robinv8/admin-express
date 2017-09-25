@@ -10,7 +10,7 @@ function download(url, callback) {
       if(res&&res.text){
         callback(res.text);
       }else{
-        console.log(err.message||'请求异常！');
+        console.error(url,(err&&err.message)||'请求异常！');
       }
     });
 
@@ -32,6 +32,8 @@ function spider(url) {
         if (isUrl) {
           var urlText = $(e).text().trim();
           var parentUrl = url;
+
+          console.log(url)
           SpiderDao.create(_url, urlText, parentUrl, result => {
             spider(_url);
           });
@@ -58,7 +60,8 @@ function CheckUrl(str) {
   return true;
 }
 
-spider('https://www.cnblogs.com/')
+
+spider('https://www.jd.com/')
 
 
 function traverse(_self, $) {

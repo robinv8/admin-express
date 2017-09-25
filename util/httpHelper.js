@@ -51,44 +51,6 @@ var httpHelper = {
       .end(function (err, res) {
         callback(null, _data, res, req);
       });
-/*    var req = httpLib.request(options, function (res) {
-      var contentType = res.headers["content-type"].split(';')[1].split('=')[1];
-      var bufferHelper = new BufferHelper();
-
-      res.on('data', function (chunk) {
-        bufferHelper.concat(chunk);
-      });
-      res.on('end', function () {
-        var _data;
-        if (options.buffer) {
-          _data = bufferHelper.toBuffer();
-        }
-        else {
-          _data = iconv.decode(bufferHelper.toBuffer(), contentType);
-
-          /!*if (typeof contentType != 'undefined' && contentType === 'text/html; charset=utf-8') {
-            _data = iconv.decode(bufferHelper.toBuffer(), 'utf-8');
-          } else {
-            _data = iconv.decode(bufferHelper.toBuffer(), 'utf-8');
-          }*!/
-        }
-        callback(null, _data, res, req);
-      });
-    });
-
-    req.on('error', function (err) {
-      callback(err);
-    });
-
-    req.write(content);
-
-    if (timeout && timeout > 0) {
-      req.setTimeout(timeout, function () {
-        callback(new Error('request timeout'), '');
-      });
-    }
-
-    req.end();*/
   },
 
   /**
