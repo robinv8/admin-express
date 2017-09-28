@@ -2,7 +2,6 @@ var express = require('express')
   , path = require('path')
   , bodyParser = require('body-parser')
   , index = require('./routes/index')
-  , users = require('./routes/users')
   , fs = require('fs')
   , morgan = require('morgan')
   //, spider = require('./spider/spider')
@@ -76,8 +75,7 @@ files.forEach((filename) => {
     return
   }
   require(controllerPath + '/' + filePrefix)(app);
-})
-
+});
 
 /**
  * load the routing
@@ -85,6 +83,5 @@ files.forEach((filename) => {
 app.get('/', function (req, res) {
   res.render('index', {title: 'Express'});
 });
-app.use('/users', users);
 
 module.exports = app;

@@ -1,3 +1,4 @@
+/*
 var multiparty = require('multiparty');
 var SpeechClient = require('../util/aipspeechclient');
 var fs = require('fs');
@@ -32,4 +33,4 @@ module.exports = (app) => {
     });
     //SpeechClient(source)
   })
-}
+}*/
