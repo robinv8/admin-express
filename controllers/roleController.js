@@ -1,10 +1,19 @@
 const role = require('../dao/roleDao');
 module.exports = (app) => {
-  const apiPath = '/' + app.version + '/roles';
+  const apiPath = '/jarvis/' + app.version + '/roles';
+
   app.get(apiPath, (req, res, next) => {
     const pageIndex = req.query.pageIndex;
     const pageSize = req.query.pageSize;
     role.findAndCount(pageIndex, pageSize)
+      .then((result) => {
+        res.send(result)
+      }, (err) => {
+        res.send(err);
+      })
+  });
+  app.get(apiPath + '/all', (req, res, next) => {
+    role.findAll()
       .then((result) => {
         res.send(result)
       }, (err) => {

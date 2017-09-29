@@ -1,7 +1,7 @@
 const admin = require('../dao/adminDao');
 
 module.exports = (app) => {
-    const apiPath = '/' + app.version + '/admins';
+    const apiPath = '/jarvis/' + app.version + '/admins';
     app.get(apiPath, (req, res, next) => {
         const pageIndex = req.query.pageIndex;
         const pageSize = req.query.pageSize;
