@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   mysql: {
-    host: '192.168.0.150',
+    host: '47.94.216.34',
     user: 'root',
     password: 'ryb19930000',
     database: 'Jarvis',
