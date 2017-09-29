@@ -1,6 +1,6 @@
-var app = require('../config/applicationMysql');
-var spiderModel = require('../models/j_base');
-var Spider = spiderModel('j_spider');
+const app = require('../config/applicationMysql');
+const spiderModel = require('../models/j_base');
+const Spider = spiderModel('j_spider');
 
 module.exports = {
   create: function (url, urltext, parenturl,callback) {

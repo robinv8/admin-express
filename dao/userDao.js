@@ -1,5 +1,5 @@
-var BaseDao = require('./baseDao');
-var userDao = Object.create(BaseDao('j_users'));
+const BaseDao = require('./baseDao');
+const userDao = Object.create(BaseDao('j_users'));
 module.exports = userDao;
 /*
 module.exports = {
