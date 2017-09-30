@@ -18,7 +18,8 @@ module.exports = (app) => {
         res.send(result)
       }, (err) => {
         res.send(err);
-      })
+      });
+      next();
   });
   app.get(apiPath + '/:id', (req, res, next) => {
     role.findById(req.params.id)

@@ -22,8 +22,9 @@ module.exports = (app) => {
     });
     app.post(apiPath, (req, res, next) => {
         admin.create({
-            adminName: req.body.username || req.query.adminName,
-            adminPassword: req.body.password || req.query.adminPassword
+            adminName: req.body.adminName || req.query.adminName,
+            adminPassword: req.body.adminPassword || req.query.adminPassword,
+            roleId: req.body.roleId || req.query.roleId
         }).then((result) => {
             res.send(result);
         }, (err) => {
@@ -49,8 +50,9 @@ module.exports = (app) => {
         admin.update({
             adminId: req.params.id
         }, {
-            adminName: req.body.username || req.query.adminName,
-            adminPassword: req.body.password || req.query.adminPassword
+            adminName: req.body.adminName || req.query.adminName,
+            adminPassword: req.body.adminPassword || req.query.adminPassword,
+            roleId: req.body.roleId || req.query.roleId
         }).then((result) => {
             res.send(result);
         }, (err) => {
