@@ -16,7 +16,6 @@ module.exports = function (sequelize, DataTypes) {
         },
         permissionType: {
             type: DataTypes.INTEGER(1),
-            allowNull: false,
             field: 'permission_type'
         },
         permissionParentId: {

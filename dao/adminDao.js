@@ -1,3 +1,3 @@
-var BaseDao = require('./baseDao');
-var adminDao = Object.create(BaseDao('jshop_admin'));
+const BaseDao = require('./baseDao');
+const adminDao = Object.create(BaseDao('jshop_admin'));
 module.exports = adminDao;

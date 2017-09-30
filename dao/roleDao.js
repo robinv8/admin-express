@@ -1,3 +1,3 @@
-var BaseDao = require('./baseDao');
-var roleDao = Object.create(BaseDao('jshop_role'));
+const BaseDao = require('./baseDao');
+const roleDao = Object.create(BaseDao('jshop_role'));
 module.exports = roleDao;
