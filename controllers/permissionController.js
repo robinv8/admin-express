@@ -29,10 +29,13 @@ module.exports = (app) => {
             })
     });
     app.post(apiPath, (req, res, next) => {
+        const permissionParentIds = req.body.permissionParentIds || req.query.permissionParentIds;
         permission.create({
             permissionName: req.body.permissionName || req.query.permissionName,
             permissionType: req.body.permissionType || req.query.permissionType,
-            permissionParentId: req.body.permissionParentId || req.query.permissionParentId
+            permissionUrl: req.body.permissionUrl || req.query.permissionUrl,
+            permissionParentIds: permissionParentIds,
+            permissionParentId: permissionParentIds.split(',').pop()
         }).then((result) => {
             res.send(result);
         }, (err) => {
@@ -54,7 +57,9 @@ module.exports = (app) => {
         }, {
             permissionName: req.body.permissionName || req.query.permissionName,
             permissionType: req.body.permissionType || req.query.permissionType,
-            permissionParentId: req.body.permissionParentId || req.query.permissionParentId
+            permissionUrl: req.body.permissionUrl || req.query.permissionUrl,
+            permissionParentIds: permissionParentIds,
+            permissionParentId: permissionParentIds.split(',').pop()
         }).then((result) => {
             res.send(result);
         }, (err) => {

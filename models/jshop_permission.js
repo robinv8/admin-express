@@ -22,7 +22,19 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(64),
             allowNull: true,
             field: 'permission_parent_id'
-        }
+        },
+        permissionParentIds: {
+            type: DataTypes.STRING(200),
+            field: 'permission_parent_ids'
+        },
+        permissionParentNames: {
+            type: DataTypes.STRING(200),
+            field: 'permission_parent_names'
+        },
+        permissionUrl: {
+            type: DataTypes.STRING(200),
+            field: 'permission_url'
+        },
     }, {
         tableName: 'jshop_permission',
         timestamps: false

@@ -11,7 +11,7 @@ module.exports = (modelName) => {
      */
     function findAll(params) {
         const options = {};
-        const {where} = params;
+        const {where} = params || {};
         if (where) {
             options.where = where;
         }
