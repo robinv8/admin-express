@@ -16,11 +16,11 @@ var sequelize = new Sequelize(mysql.database, mysql.user, mysql.password, {
 });
 
 function ApplicationMysql() {
-    console.log(sequelize.getDialect());
-  return sequelize;
+    return sequelize;
 }
 
 var myLogFunc = function (msg) {
+    console.log(msg)
 }
 module.exports = new ApplicationMysql();
 
