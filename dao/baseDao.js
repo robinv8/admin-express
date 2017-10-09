@@ -3,7 +3,7 @@ const baseModel = require('../models/j_base');
 const Response = require('../responses/responsejson')
 
 module.exports = (modelName) => {
-    var Modal = baseModel(modelName);
+    var Model = baseModel(modelName);
 
     /**
      * query all records
@@ -16,7 +16,7 @@ module.exports = (modelName) => {
             options.where = where;
         }
         var promise = new Promise((resolve, reject) => {
-            Modal.findAll(options)
+            Model.findAll(options)
                 .then((result) => {
                     resolve(Response.success(result))
                 }).catch((err) => {
@@ -32,7 +32,7 @@ module.exports = (modelName) => {
      */
     function findById(id) {
         const promise = new Promise((resolve, reject) => {
-            Modal.findById(id)
+            Model.findById(id)
                 .then((result) => {
                     resolve(Response.success(result))
                 }).catch((err) => {
@@ -45,7 +45,7 @@ module.exports = (modelName) => {
     function update(idObj, params) {
         const promise = new Promise((resolve, reject) => {
             app.sync().then(function () {
-                Modal.update(params, {
+                Model.update(params, {
                     where: idObj
                 }).then(function (result) {
                     resolve(Response.success(result))
@@ -65,7 +65,7 @@ module.exports = (modelName) => {
     function create(params) {
         const promise = new Promise((resolve, reject) => {
             app.sync().then(function () {
-                Modal.create(params).then(function (result) {
+                Model.create(params).then(function (result) {
                     resolve(Response.success(result))
                 }).catch(function (err) {
                     reject(Response.error(err));
@@ -83,7 +83,7 @@ module.exports = (modelName) => {
      */
     function findAndCount(pageIndex, pageSize) {
         const promise = new Promise((resolve, reject) => {
-            Modal.findAndCount({offset: (pageIndex - 1) * pageSize, limit: pageSize * 1}).then(function (result) {
+            Model.findAndCount({offset: (pageIndex - 1) * pageSize, limit: pageSize * 1}).then(function (result) {
                 resolve(Response.success({
                     content: result.rows,
                     total: result.count
@@ -101,7 +101,7 @@ module.exports = (modelName) => {
      */
     function count() {
         const promise = new Promise((resolve, reject) => {
-            Modal.count().then(function (total) {
+            Model.count().then(function (total) {
                 resolve(total);
             }).catch((err) => {
                 reject(err);
@@ -120,7 +120,7 @@ module.exports = (modelName) => {
     function remove(idObj) {
         const promise = new Promise((resolve, reject) => {
             app.sync().then(function () {
-                Modal.destroy({'where': idObj})
+                Model.destroy({'where': idObj})
                     .then((result) => {
                         resolve(Response.success(result))
                     }).catch((err) => {
@@ -132,7 +132,7 @@ module.exports = (modelName) => {
     }
 
     return {
-        Modal,
+        Model,
         create,
         findAndCount,
         update,

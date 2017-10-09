@@ -35,6 +35,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(200),
             field: 'permission_url'
         },
+        permissionSort: {
+            type: DataTypes.INTEGER(10),
+            field: 'permission_sort'
+        },
     }, {
         tableName: 'jshop_permission',
         timestamps: false

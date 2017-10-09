@@ -20,6 +20,14 @@ module.exports = (app) => {
             });
         next();
     });
+    app.get(apiPath + '/menu', (req, res, next) => {
+        permission.menu()
+            .then((result) => {
+                res.send(result)
+            }, (err) => {
+                res.send(err)
+            })
+    })
     app.get(apiPath + '/:id', (req, res, next) => {
         permission.findById(req.params.id)
             .then((result) => {
@@ -34,6 +42,7 @@ module.exports = (app) => {
             permissionName: req.body.permissionName || req.query.permissionName,
             permissionType: req.body.permissionType || req.query.permissionType,
             permissionUrl: req.body.permissionUrl || req.query.permissionUrl,
+            permissionSort: req.body.permissionSort || req.query.permissionSort,
             permissionParentIds: permissionParentIds,
             permissionParentId: permissionParentIds.split(',').pop()
         }).then((result) => {
@@ -52,12 +61,14 @@ module.exports = (app) => {
         })
     });
     app.put(apiPath + '/:id', (req, res, next) => {
-        role.update({
+        const permissionParentIds = req.body.permissionParentIds || req.query.permissionParentIds;
+        permission.update({
             permissionId: req.params.id
         }, {
             permissionName: req.body.permissionName || req.query.permissionName,
             permissionType: req.body.permissionType || req.query.permissionType,
             permissionUrl: req.body.permissionUrl || req.query.permissionUrl,
+            permissionSort: req.body.permissionSort || req.query.permissionSort,
             permissionParentIds: permissionParentIds,
             permissionParentId: permissionParentIds.split(',').pop()
         }).then((result) => {
