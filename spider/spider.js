@@ -35,7 +35,7 @@ function spider(url) {
 
           console.log(url)
           SpiderDao.create(_url, urlText, parentUrl, result => {
-            spider(_url);
+            //spider(_url);
           });
         }
 
